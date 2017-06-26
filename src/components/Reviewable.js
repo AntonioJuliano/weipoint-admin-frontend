@@ -5,6 +5,7 @@ import isEqual from 'lodash.isequal';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import DoneAllIcon from 'react-material-icons/icons/action/done-all';
 import { Row } from 'react-flexbox-grid';
+import paths from '../lib/ApiPaths';
 
 class Reviewable extends React.Component {
   constructor(props) {
@@ -65,7 +66,7 @@ class Reviewable extends React.Component {
   }
 
   async applyDecision(accept, items, address, type, id) {
-    const requestPath = '/api/v1/metadata/review';
+    const requestPath = paths.metadata.review;
 
     let request = {
       address: address,

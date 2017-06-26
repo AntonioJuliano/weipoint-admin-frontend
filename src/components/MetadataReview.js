@@ -4,6 +4,7 @@ import { Row, Col } from 'react-flexbox-grid';
 import Reviewable from './Reviewable';
 import CheckCircleIcon from 'react-material-icons/icons/action/check-circle';
 import { green500 } from 'material-ui/styles/colors';
+import paths from '../lib/ApiPaths';
 
 class MetadataReview extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class MetadataReview extends React.Component {
   }
 
   async fetchData() {
-    const requestPath = '/api/v1/metadata/unapproved';
+    const requestPath = paths.metadata.unapproved;
 
     try {
       const response = await fetch(requestPath, { method: 'get' });
