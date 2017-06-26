@@ -1,0 +1,30 @@
+general:
+  branches:
+    only:
+     - master
+machine:
+  timezone: America/Los_Angeles
+  node:
+    version: 8.0.0
+dependencies:
+  pre:
+    - aws configure set region us-east-1
+    - aws configure set preview.cloudfront true
+    - aws configure set preview.create-invalidation true
+  override:
+    - npm install -g npm && npm install
+database:
+  override:
+    - echo "Skipping database phase"
+compile:
+  override:
+    - npm run build
+test:
+  override:
+    - echo "Skipping test phase"
+deployment:
+  production:
+    branch: master
+    commands:
+      - aws s3 sync build s3://weipoint-admin/ --delete
+      - aws cloudfront create-invalidation --cli-input-json "{\"DistributionId\":\"E1ZGPH5JTBLRVW\",\"InvalidationBatch\":{\"Paths\":{\"Quantity\":1,\"Items\":[\"/*\"]},\"CallerReference\":\"$(date +%s)\"}}"
