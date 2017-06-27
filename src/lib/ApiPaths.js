@@ -1,6 +1,6 @@
 const origin = process.env.NODE_ENV === 'development' ?
   'http://localhost:3003' :
-  'https://admin-api.weipoint.com:3004';
+  'https://admin-api.weipoint.com';
 
 const paths = {
   metadata: {
